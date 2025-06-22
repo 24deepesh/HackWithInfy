@@ -1,0 +1,23 @@
+class Solution {
+    public int findMinArrowShots(int[][] points) {
+        
+        if (points.length == 0) return 0;
+
+        // Sort the arrays on the basis of end time
+        Arrays.sort(points, Comparator.comparingInt(i -> i[1]));
+
+        int arrow = 1;
+        int arrowEnd = points[0][1];
+        int n = points.length;
+
+        for(int i = 1; i < n; i++){
+            // If current balloon starts after arrowEnd, we need new arrow
+            if(points[i][0] > arrowEnd){
+                arrow++;
+                arrowEnd = points[i][1];
+            }
+            // Else: balloon is burst by current arrow, do nothing
+        }
+        return arrow;
+    }
+}
